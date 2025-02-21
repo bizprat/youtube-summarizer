@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import { YoutubeTranscript } from 'youtube-transcript';
 import OpenAI from 'openai';
+import fs from 'fs/promises';
+import path from 'path';
 
 dotenv.config();
 
@@ -18,6 +20,30 @@ const openai = new OpenAI({
 // YouTube video URL to summarize
 const videoUrl =
   'https://www.youtube.com/watch?v=15LCeh46sMs';
+
+/**
+ * Ensures the output directory exists
+ * @returns {Promise<void>}
+ */
+async function ensureOutputDir() {
+  const outputDir = path.join(process.cwd(), 'output');
+  try {
+    await fs.access(outputDir);
+  } catch {
+    await fs.mkdir(outputDir);
+  }
+  return outputDir;
+}
+
+/**
+ * Extracts video ID from YouTube URL
+ * @param {string} url - YouTube video URL
+ * @returns {string} Video ID
+ */
+function getVideoId(url) {
+  const match = url.match(/[?&]v=([^&]+)/);
+  return match ? match[1] : 'video';
+}
 
 /**
  * Extracts the transcript from a YouTube video
@@ -65,6 +91,24 @@ async function summarizeText(text) {
 }
 
 /**
+ * Saves the summary to a file in the output directory
+ * @param {string} summary - The generated summary
+ * @param {string} videoId - The YouTube video ID
+ * @returns {Promise<string>} Path to the saved file
+ */
+async function saveSummary(summary, videoId) {
+  const outputDir = await ensureOutputDir();
+  const timestamp = new Date()
+    .toISOString()
+    .replace(/[:.]/g, '-');
+  const filename = `summary_${videoId}_${timestamp}.txt`;
+  const filepath = path.join(outputDir, filename);
+
+  await fs.writeFile(filepath, summary, 'utf8');
+  return filepath;
+}
+
+/**
  * Main function to orchestrate the video summarization process
  */
 async function main() {
@@ -75,8 +119,13 @@ async function main() {
     console.log('Generating summary...');
     const summary = await summarizeText(transcript);
 
+    // Save summary to file
+    const videoId = getVideoId(videoUrl);
+    const filepath = await saveSummary(summary, videoId);
+
     console.log('\nSummary:');
     console.log(summary);
+    console.log(`\nSummary saved to: ${filepath}`);
   } catch (error) {
     console.error('An error occurred:', error.message);
   }

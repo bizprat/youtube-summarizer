@@ -1,0 +1,6 @@
++------------------------------------------+
+|     🎥 YouTube Video Summarizer 📝      |
+|                                          |
+|    Transform Videos into Smart Summaries  |
+|        Powered by OpenRouter AI 🤖       |
++------------------------------------------+

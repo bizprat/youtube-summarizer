@@ -1,21 +1,40 @@
-# YouTube Video Summarizer
+# 🎥 YouTube Video Summarizer
 
-A Node.js application that automatically generates bullet-point summaries of YouTube videos using AI. The application extracts the video transcript and uses OpenRouter.ai's GPT-4-mini model to create concise, easy-to-read summaries.
+<div align="center">
 
-## Features
+```
++------------------------------------------+
+|     🎥 YouTube Video Summarizer 📝      |
+|                                          |
+|    Transform Videos into Smart Summaries  |
+|        Powered by OpenRouter AI 🤖       |
++------------------------------------------+
+```
 
-- Extract transcripts from YouTube videos
-- Generate AI-powered bullet-point summaries
-- Easy-to-use command-line interface
-- Uses OpenRouter.ai's GPT-4-mini model for high-quality summarization
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
+[![OpenRouter](https://img.shields.io/badge/AI-OpenRouter-orange)](https://openrouter.ai/)
 
-## Prerequisites
+A powerful Node.js application that transforms YouTube videos into concise, bullet-point summaries using AI technology.
+
+</div>
+
+## ✨ Features
+
+| Feature | Description |
+|---------|------------|
+| 🎯 Transcript Extraction | Automatically extracts transcripts from YouTube videos |
+| 🤖 AI-Powered Summaries | Uses OpenRouter.ai's GPT-4-mini model for intelligent summarization |
+| 💾 Local Storage | Saves summaries to files with timestamps for future reference |
+| 🚀 Easy to Use | Simple command-line interface |
+
+## 🛠️ Prerequisites
 
 - Node.js installed on your system
-- An OpenRouter.ai API key
+- An OpenRouter.ai API key ([Get one here](https://openrouter.ai/))
 - YouTube video URL to summarize
 
-## Installation
+## 📦 Installation
 
 1. Clone the repository:
 ```bash
@@ -29,11 +48,11 @@ npm install
 ```
 
 3. Create a `.env` file in the root directory and add your OpenRouter API key:
-```
+```env
 OPENROUTER_API_KEY=your_api_key_here
 ```
 
-## Usage
+## 🚀 Usage
 
 1. Open `index.js` and replace the `videoUrl` with your desired YouTube video URL:
 ```javascript
@@ -45,20 +64,56 @@ const videoUrl = 'your-youtube-video-url';
 node index.js
 ```
 
-The script will fetch the video transcript and generate a bullet-point summary in the console.
+### Example Output Structure
 
-## How It Works
+```
+📁 youtube-summarizer/
+├── 📁 output/
+│   └── 📄 summary_VIDEO-ID_2024-02-21T12-30-45-000Z.txt
+├── 📄 index.js
+├── 📄 .env
+└── 📄 package.json
+```
 
-1. Uses `youtube-transcript` to extract the video transcript
-2. Sends the transcript to OpenRouter.ai's GPT-4-mini model
-3. Processes the response to create a bullet-point summary
-4. Displays the summary in the console
+## 🔄 How It Works
 
-## Contributing
+```mermaid
+graph LR
+    A[YouTube URL] --> B[Extract Transcript]
+    B --> C[Process Text]
+    C --> D[AI Summarization]
+    D --> E[Generate Summary]
+    E --> F[Save to File]
+    E --> G[Display in Console]
+```
 
-Feel free to open issues or submit pull requests if you have suggestions for improvements.
+## 📝 Example Summary
 
-## License
+Here's an example of what the summary output looks like:
+
+```
+Summary of "Introduction to Node.js":
+
+• Node.js is a JavaScript runtime built on Chrome's V8 engine
+• Enables server-side JavaScript execution
+• Key features include:
+  - Asynchronous & Event-driven
+  - Fast execution
+  - NPM ecosystem
+• Perfect for scalable network applications
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
 
 This project is licensed under the ISC License - see below for details:
 
@@ -77,3 +132,7 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ```
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=bizprat/youtube-summarizer&type=Date)](https://star-history.com/#bizprat/youtube-summarizer&Date)
