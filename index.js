@@ -8,17 +8,22 @@ dotenv.config();
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY,
-  // defaultHeaders: {
-  //   'HTTP-Referer':
-  //     'https://github.com/yourusername/youtube-summarizer', // Replace with your repo
-  //   'X-Title': 'YouTube Summarizer',
-  // },
+  defaultHeaders: {
+    'HTTP-Referer':
+      'https://github.com/bizprat/youtube-summarizer',
+    'X-Title': 'YouTube Summarizer',
+  },
 });
 
-// Hardcoded YouTube video URL for testing
+// YouTube video URL to summarize
 const videoUrl =
-  'https://www.youtube.com/watch?v=15LCeh46sMs'; // Test video URL
+  'https://www.youtube.com/watch?v=15LCeh46sMs';
 
+/**
+ * Extracts the transcript from a YouTube video
+ * @param {string} videoUrl - The URL of the YouTube video
+ * @returns {Promise<string>} The complete transcript text
+ */
 async function getTranscript(videoUrl) {
   try {
     const transcript =
@@ -30,6 +35,11 @@ async function getTranscript(videoUrl) {
   }
 }
 
+/**
+ * Generates a bullet-point summary of the provided text using OpenRouter AI
+ * @param {string} text - The text to summarize
+ * @returns {Promise<string>} The bullet-point summary
+ */
 async function summarizeText(text) {
   try {
     const response = await openai.chat.completions.create({
@@ -54,6 +64,9 @@ async function summarizeText(text) {
   }
 }
 
+/**
+ * Main function to orchestrate the video summarization process
+ */
 async function main() {
   try {
     console.log('Fetching video transcript...');
