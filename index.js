@@ -19,7 +19,7 @@ const openai = new OpenAI({
 
 // YouTube video URL to summarize
 const videoUrl =
-  'https://www.youtube.com/watch?v=15LCeh46sMs';
+  'https://www.youtube.com/watch?v=mMBjrNK7dTw';
 
 /**
  * Ensures the output directory exists
@@ -101,7 +101,7 @@ async function saveSummary(summary, videoId) {
   const timestamp = new Date()
     .toISOString()
     .replace(/[:.]/g, '-');
-  const filename = `summary_${videoId}_${timestamp}.txt`;
+  const filename = `summary_${videoId}_${timestamp}.md`;
   const filepath = path.join(outputDir, filename);
 
   await fs.writeFile(filepath, summary, 'utf8');
