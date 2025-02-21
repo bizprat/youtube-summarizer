@@ -19,7 +19,7 @@ const openai = new OpenAI({
 
 // YouTube video URL to summarize
 const videoUrl =
-  'https://www.youtube.com/watch?v=mMBjrNK7dTw';
+  'https://www.youtube.com/watch?v=RGJMUYJ4OcU';
 
 /**
  * Ensures the output directory exists
