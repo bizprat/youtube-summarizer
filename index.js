@@ -21,6 +21,23 @@ const openai = new OpenAI({
 const videoUrl =
   'https://www.youtube.com/watch?v=RGJMUYJ4OcU';
 
+const SYSTEM_PROMPT = ` 
+"Act as a technical content summarizer. Using the provided subtitles from the Agent AI project tutorial video, generate a structured, concise summary that includes the following sections:  
+1. **Project Objective**: Briefly state the primary goal of the project.  
+2. **Key Steps**: List the main steps or stages involved in building the Agent AI system. 
+3. **Tools/Technologies**: Identify frameworks, libraries, or tools used (e.g., Python, LangChain, LLMs).  
+4. **Challenges & Solutions**: Highlight any technical hurdles mentioned and how they were resolved.  
+5. **Outcome**: Describe the final result or demo shown in the tutorial.  
+6. **Audience & Prerequisites**: Note the target audience and any required prior knowledge (e.g., Python basics).  
+
+**Guidelines**:  
+- Use clear, jargon-free language.  
+- Exclude timestamps, speaker labels, and non-essential details.  
+- Keep the summary under 200 words.  
+- Format with bullet points or short paragraphs for readability.  
+"  
+`;
+
 /**
  * Ensures the output directory exists
  * @returns {Promise<void>}
@@ -73,12 +90,11 @@ async function summarizeText(text) {
       messages: [
         {
           role: 'system',
-          content:
-            'You are a helpful assistant that creates concise bullet-point summaries. Focus on the main points and key takeaways.',
+          content: SYSTEM_PROMPT,
         },
         {
           role: 'user',
-          content: `Please summarize the following text in bullet points:\n\n${text}`,
+          content: `Here is the subtitle:\n\n${text}`,
         },
       ],
     });
